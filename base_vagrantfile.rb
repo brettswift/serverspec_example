@@ -32,19 +32,19 @@ Vagrant.require_version '>= 1.4.0'
 #box without puppet installed - coincides with ./bootstraps/  scripts.  Use this if no PE 3.x .box file exists
 #http://puppet-vagrant-boxes.puppetlabs.com/centos-64-x64-vbox4210-nocm.box
 #latest box with PE 3.0.1 used by TT core.
-vagrant_box_url = 'http://vagrantboxes.devops.sjrb.ad/vagrant-boxes/centos-6.4_x86_64-v20131022.box'
-vagrant_box_name = 'centos-6.4_x86_64-v20131022'
+vagrant_box_url = 'http://puppet-vagrant-boxes.puppetlabs.com/centos-64-x64-vbox4210-nocm.box'
+vagrant_box_name = 'centos-64-x64-vbox4210-nocm.box'
 
 defaults = {
   :ip            => '33.33.34.',
   :box           => vagrant_box_name,
   :box_url       => vagrant_box_url,
-  :ram           => '1024',
+  :ram           => '512',
   :forward_agent => false,
   :forward_x11   => true,
 }
 
-domain = 'sjrb.ca'
+domain = 'citest'
 
 puppet_nodes = []
 subnet=10
@@ -90,7 +90,7 @@ Vagrant.configure('2') do |config|
         # node_config.vm.synced_folder '~/Dropbox/Puppet', '/tmp/puppet/pe/'
         # node_config.vm.provision :shell, :path => "bootstraps/dropbox-bootstrap-puppet-enterprise.sh"
 
-        node_config.vm.provision :shell, :path => "../puppetconfig/vagrant/bootstraps/bootstrap-puppet-enterprise.sh"
+        # node_config.vm.provision :shell, :path => "../puppetconfig/vagrant/bootstraps/bootstrap-puppet-enterprise.sh"
       end
 
       # # Puppet Enterprise locations

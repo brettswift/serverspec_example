@@ -10,25 +10,44 @@ def log(first, second = '')
 end
 
 RSpec.configure do |c|
-  if ENV['ASK_SUDO_PASSWORD']
-    require 'highline/import'
-    c.sudo_password = ask("Enter sudo password: ") { |q| q.echo = false }
-  else
-    c.sudo_password = ENV['SUDO_PASSWORD']
-  end
+  # if ENV['ASK_SUDO_PASSWORD']
+  #   require 'highline/import'
+  #   c.sudo_password = ask("Enter sudo password: ") { |q| q.echo = false }
+  # else
+  #   c.sudo_password = ENV['SUDO_PASSWORD']
+  # end
   # c.before :each do
     # log "before each:", " c.host: #{c.host}" " host #{host}"
   # end
 
+  c.before :suite do
+    log "","Before suite"
+  end
+  # c.before :all do
+  #   log "","Before all"
+  # end
+  # c.before :each do
+  #   log "Before each"
+  # end
+  # c.after :each do
+  #   log "After each"
+  # end
+  # c.after :all do
+  #   log "","After all"
+  # end
+  # c.after :suite do
+  #   log "After suite"
+  # end
+
+
   c.before :all do
     block = self.class.metadata[:example_group_block]
-    if RUBY_VERSION.start_with?('1.8')
-      file = block.to_s.match(/.*@(.*):[0-9]+>/)[1]
-    else
+  #   if RUBY_VERSION.start_with?('1.8')
+  #     file = block.to_s.match(/.*@(.*):[0-9]+>/)[1]
+  #   else
       file = block.source_location.first
-    end
+  #   end
     host  = File.basename(Pathname.new(file).dirname)
-    log "before all:", " c.host: #{c.host} host #{host} ---- #{file}"
 
     
     if c.host != host
@@ -36,7 +55,8 @@ RSpec.configure do |c|
       c.host  = host
       options = Net::SSH::Config.for(c.host)
       user    = options[:user] || Etc.getlogin
-      vagrant_up = `vagrant up #{host}`
+    log "before all:", " c.host: #{c.host} host #{host} ---- #{file}"
+      # vagrant_up = `vagrant up #{host}`
       config = `vagrant ssh-config #{host}`
       if config != ''
         config.each_line do |line|
@@ -64,11 +84,12 @@ RSpec.configure do |c|
     end
     host  = File.basename(Pathname.new(file).dirname)
     # vagrant_destroy = `vagrant destroy #{host} -f`
-    puts "destroyed #{host}"
-    log "after all", "vagrant destroy #{host} -f"
+    log "destroyed #{host}"
+    # log "after all", "vagrant destroy #{host} -f"
   end
+  
   c.after :suite do 
-    log " ", "after suite" 
-    vagrant_destroy = `vagrant destroy -f`
+    log "", "after suite" 
+    # vagrant_destroy = `vagrant destroy -f`
   end
 end
