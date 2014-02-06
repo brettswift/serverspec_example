@@ -93,6 +93,9 @@ Vagrant.configure('2') do |config|
         # node_config.vm.provision :shell, :path => "../puppetconfig/vagrant/bootstraps/bootstrap-puppet-enterprise.sh"
       end
 
+      # test to make the vagrant provisioner fail - and test from serverspec
+      # node_config.vm.provision :shell, inline: "exit -99"
+
       # # Puppet Enterprise locations
       # node_config.vm.synced_folder '../../manifests', '/etc/puppetlabs/puppet/environments/master/manifests'
       # node_config.vm.synced_folder '../../modules', '/etc/puppetlabs/puppet/environments/master/modules'

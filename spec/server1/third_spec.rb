@@ -1,15 +1,17 @@
 require 'spec_helper'
+describe "container" do
+  describe package('crond') do
+    # it { should be_installed }
+    it { puts "server_1 testing package" }
+  end
 
-describe package('crond') do
-  # it { should be_installed }
- it { puts "server_z testing package" }
-end
+  describe service('ntpd') do
+    # it { should be_enabled   }
+    # it { should_not be_running   }
+    it { puts "server_1 testing service1" }
+    it { puts "server_1 testing service2" }
 
-describe service('ntpd') do
-  # it { should be_enabled   }
-  # it { should_not be_running   }
- it { puts "server_z testing service1" }
- it { puts "server_z testing service2" }
+  end
 
 end
 

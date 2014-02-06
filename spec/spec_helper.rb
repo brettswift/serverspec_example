@@ -48,6 +48,7 @@ RSpec.configure do |c|
       file = block.source_location.first
   #   end
     host  = File.basename(Pathname.new(file).dirname)
+    log "before all: upped  #{host}", " c.host: #{c.host} host #{host} ---- #{file}"
 
     
     if c.host != host
@@ -55,7 +56,6 @@ RSpec.configure do |c|
       c.host  = host
       options = Net::SSH::Config.for(c.host)
       user    = options[:user] || Etc.getlogin
-    log "before all:", " c.host: #{c.host} host #{host} ---- #{file}"
       # vagrant_up = `vagrant up #{host}`
       config = `vagrant ssh-config #{host}`
       if config != ''
@@ -84,10 +84,10 @@ RSpec.configure do |c|
     end
     host  = File.basename(Pathname.new(file).dirname)
     # vagrant_destroy = `vagrant destroy #{host} -f`
-    log "destroyed #{host}"
+    log "after all: destroyed #{host}"
     # log "after all", "vagrant destroy #{host} -f"
   end
-  
+
   c.after :suite do 
     log "", "after suite" 
     # vagrant_destroy = `vagrant destroy -f`

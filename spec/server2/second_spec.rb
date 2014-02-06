@@ -1,18 +1,20 @@
 require 'spec_helper'
 
-describe package('cpuspeed') do
-  # it { should be_installed }
- it { puts "server_q 2nd spec.rb:  testing package" }
+describe "test1" do
+
+  describe package('cpuspeed') do
+    # it { should be_installed }
+    it { puts "server_2 2nd spec.rb:  testing package" }
+  end
+
+  describe service('acpid') do
+    # it { should be_enabled   }
+    # it { should be_running   }
+    it { puts "server_2 2nd spec.rb:  testing servicea" }
+    it { puts "server_3 2nd spec.rb:  testing serviceb" }
+
+  end
 end
-
-describe service('acpid') do
-  # it { should be_enabled   }
-  # it { should be_running   }
- it { puts "server_q 2nd spec.rb:  testing service1" }
- it { puts "server_q 2nd spec.rb:  testing service2" }
-
-end
-
 # describe port(80) do
 #  it { puts "server_q 2nd spec.rb:  testing port" }
 #   # it { should be_listening }

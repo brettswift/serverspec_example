@@ -1,18 +1,21 @@
 require 'spec_helper'
 
-describe package('crond') do
-  # it { should be_installed }
- it { puts "server_q testing package" }
+describe "test1" do
+  describe package('crond') do
+    # it { should be_installed }
+    it { puts "server_2 testing package" }
+  end
+
+  describe service('messagebus') do
+    # it { should be_enabled   }
+    # it { should_not be_running   }
+    it { puts "server_2 testing servicea" }
+    it { puts "server_2 testing serviceb" }
+
+  end
+
+  # require_relative 'second.rb'
 end
-
-describe service('messagebus') do
-  # it { should be_enabled   }
-  # it { should_not be_running   }
- it { puts "server_q testing service1" }
- it { puts "server_q testing service2" }
-
-end
-
 # describe port(80) do
 #  it { puts "epq testing port" }
 #   # it { should be_listening }
