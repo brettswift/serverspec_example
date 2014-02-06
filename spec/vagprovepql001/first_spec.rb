@@ -7,7 +7,7 @@ end
 
 describe service('puppet') do
   # it { should be_enabled   }
-  it { should be_running   }
+  it { should_not be_running   }
  it { puts "epq testing service1" }
  it { puts "epq testing service2" }
 

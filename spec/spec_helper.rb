@@ -29,6 +29,8 @@ RSpec.configure do |c|
     end
     host  = File.basename(Pathname.new(file).dirname)
     log "before all:", " c.host: #{c.host} host #{host} ---- #{file}"
+
+    
     if c.host != host
       c.ssh.close if c.ssh
       c.host  = host
