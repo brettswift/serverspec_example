@@ -1,30 +1,18 @@
 require 'spec_helper'
 
-describe "test1" do
+# must have container here otherwise spec helper will create a 
+# vagrant box for every describe. (it'll still do that for every test file)
+describe "container" do
 
-  describe package('cpuspeed') do
-    # it { should be_installed }
-    it { puts "server_2 2nd spec.rb:  testing package" }
+  describe service('cpuspeed') do
+    it { should_not be_running }
+    it { puts "server_2 2nd file:  testing cpuspeed" }
   end
 
   describe service('acpid') do
     # it { should be_enabled   }
-    # it { should be_running   }
-    it { puts "server_2 2nd spec.rb:  testing servicea" }
-    it { puts "server_3 2nd spec.rb:  testing serviceb" }
-
+    it { should be_running }
+    it { puts "server_2 2nd file:  testing acpid" }
+    it { puts "server_3 2nd file:  testing acpid again" }
   end
-end
-# describe port(80) do
-#  it { puts "server_q 2nd spec.rb:  testing port" }
-#   # it { should be_listening }
-# end
-
-# describe file('/etc/httpd/conf/httpd.conf') do
-#   # it { should be_file }
-#  it { puts "server_q 2nd spec.rb:  testing file" }
-#  it { puts "server_q 2nd spec.rb:  testing file1" }
-#  it { puts "server_q 2nd spec.rb:  testing file2" }
-#  it { puts "server_q 2nd spec.rb:  testing file3" }
-#   # it { should contain "ServerName vagprovepq 2nd spec.rb: l100" }
-# end
+end 
